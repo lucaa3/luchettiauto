@@ -20,7 +20,7 @@ body {
   background-color: #000000 !important;
   padding: 0.75rem 1.5rem;
   display: flex;
-  justify-content: space-between; 
+  justify-content: space-between;
   align-items: center;
 }
 
@@ -74,7 +74,7 @@ body {
     padding-top: 1rem;
     padding-bottom: 1rem;
   }
-  
+
   .navbar-nav-left,
   .navbar-nav-right {
     display: flex;
@@ -148,4 +148,8 @@ footer li a:hover {
 
 #facebook i:hover {
   color: #3b5998;
+}
+
+#tiktok i:hover {
+  color: #ff0050;
 }

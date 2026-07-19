@@ -48,74 +48,77 @@
 
   <body>
     <div class="container-fluid">
-      <!-- Navbar is injected dynamically by JS -->
       <div id="navbar-placeholder"></div>
 
       <!-- Hero -->
-      <!-- Hero -->
-<div class="row mx-0 text-button-container position-relative overflow-hidden">
-  
-  <!-- Added playsinline for iOS support -->
-  <video class="hero-video" autoplay muted loop playsinline>
-    <source src="MEDIA/backgroundwb.mp4" type="video/mp4" />
-    Your browser does not support the video tag.
-  </video>
-
-  <!-- Added z-1 to ensure text stays on top of the video -->
-  <div class="col-12 px-0 d-flex flex-column justify-content-center align-items-center z-1">
-    <h1 class="main-text">Find your next car</h1>
-    <div class="d-flex justify-content-center mt-5">
-      
-      <button
-        type="button"
-        class="d-flex justify-content-center align-items-center explore w-auto gap-3 px-4 py-2 rounded-pill"
-        onclick="triggerInventoryView()"
+      <div
+        class="row mx-0 text-button-container position-relative overflow-hidden"
       >
-        <span class="explore-label">View Inventory</span>
-        <svg
-          class="d-flex justify-content-center align-items-center"
-          width="24"
-          height="24"
-          viewBox="0 0 24 24"
-          fill="none"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <path
-            d="M5 12H19M19 12L13 6M19 12L13 18"
-            stroke="white"
-            stroke-width="2"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-          />
-        </svg>
-      </button>
+        <video class="hero-video" autoplay muted loop playsinline>
+          <source src="MEDIA/backgroundwb.mp4" type="video/mp4" />
+          Your browser does not support the video tag.
+        </video>
 
-    </div>
-  </div>
-</div>
+        <div
+          class="col-12 px-0 d-flex flex-column justify-content-center align-items-center z-1"
+        >
+          <h1 class="main-text">Find your next car</h1>
+          <div class="d-flex justify-content-center mt-5">
+            <button
+              type="button"
+              class="d-flex justify-content-center align-items-center explore w-auto gap-3 px-4 py-2 rounded-pill"
+              onclick="triggerInventoryView()"
+            >
+              <span class="explore-label">View Inventory</span>
+              <svg
+                class="d-flex justify-content-center align-items-center"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M5 12H19M19 12L13 6M19 12L13 18"
+                  stroke="white"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+              </svg>
+            </button>
+          </div>
+        </div>
+      </div>
       <!-- Middle container: image + details -->
       <div
         class="row justify-content-center align-items-center mx-0"
         id="middle-container"
       >
-      <!-- Left Column: Car Image -->
-      <div class="col-lg-6 col-md-12 d-flex justify-content-center align-items-center vehicle-image-col">
-        
-        <button id="prevVehicleBtn" class="vehicle-arrow left" type="button" aria-label="Previous car">
-          ‹
-        </button>
-        
-        <img
-          class="img-fluid"
-          id="vehicle_image"
-          alt="vehicle"
-        />
-        
-        <button id="nextVehicleBtn" class="vehicle-arrow right" type="button" aria-label="Next car">
-          ›
-        </button>
-        
-      </div>
+        <!-- Left Column: Car Image -->
+        <div
+          class="col-lg-6 col-md-12 d-flex justify-content-center align-items-center vehicle-image-col"
+        >
+          <button
+            id="prevVehicleBtn"
+            class="vehicle-arrow left"
+            type="button"
+            aria-label="Previous car"
+          >
+            ‹
+          </button>
+
+          <img class="img-fluid" id="vehicle_image" alt="vehicle" />
+
+          <button
+            id="nextVehicleBtn"
+            class="vehicle-arrow right"
+            type="button"
+            aria-label="Next car"
+          >
+            ›
+          </button>
+        </div>
 
         <!-- Right Column: Vehicle Details -->
         <div class="col-lg-6 col-md-12 vehicle-details-col">

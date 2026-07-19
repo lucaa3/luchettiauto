@@ -1,21 +1,17 @@
 function installmentCalc() {
-  // 1. Get the raw text using YOUR English IDs
   let rawPrice = document.getElementById("price").value
   let rawAdvance = document.getElementById("advance").value
   let duration = parseInt(document.getElementById("duration").value)
   let resultElement = document.getElementById("installmentResult")
 
-  // 2. Reset styling every time the function runs
   resultElement.style.fontSize = "3.5rem"
   resultElement.style.color = "#fff"
 
-  // 3. Graceful 'Empty' State
   if (rawPrice.trim() === "") {
     resultElement.innerText = "€ 0,00"
     return
   }
 
-  // Convert to numbers for math (fallback to 0 if they type something weird)
   let price = parseFloat(rawPrice) || 0
   let advance = parseFloat(rawAdvance) || 0
   let financingCapital = price - advance
@@ -50,13 +46,11 @@ function installmentCalc() {
     return
   }
 
-  // If there's nothing to finance
   if (financingCapital <= 0) {
     resultElement.innerText = "€ 0,00"
     return
   }
 
-  // --- THE ACTUAL MATH ---
   const annualRate = 6.9
   const monthlyRate = annualRate / 100 / 12
 
@@ -64,10 +58,8 @@ function installmentCalc() {
     (financingCapital * monthlyRate) /
     (1 - Math.pow(1 + monthlyRate, -duration))
 
-  // Format and Display
   const formattedRata = rata.toFixed(2).replace(".", ",")
   resultElement.innerText = "€ " + formattedRata
 }
 
-// Run once on load to set the initial value
 window.onload = installmentCalc
