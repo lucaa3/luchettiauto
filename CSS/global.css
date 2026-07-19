@@ -1,0 +1,151 @@
+/* IMPORTS */
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@300&family=Open+Sans&family=Schoolbell&display=swap");
+
+/* GENERAL STYLES */
+html,
+body {
+  overflow-x: hidden;
+  font-family: Montserrat;
+  background-color: #000000;
+  color: #f5f5f5;
+  scroll-behavior: smooth;
+}
+
+*:focus {
+  outline: 0 !important;
+}
+
+/* Base Navbar Styles (Mobile First) */
+.navbar {
+  background-color: #000000 !important;
+  padding: 0.75rem 1.5rem;
+  display: flex;
+  justify-content: space-between; 
+  align-items: center;
+}
+
+/* Link Styling */
+.nav-link {
+  color: #d0d0d0 !important;
+  text-decoration: none;
+  font-size: 0.95rem;
+  font-weight: 500;
+  transition: color 0.3s ease;
+  padding: 0.5rem 0; /* Added padding for better mobile tap targets */
+  margin: 0;
+}
+
+.nav-link:hover {
+  color: #ffffff !important;
+}
+
+/* Logo Styling */
+.navbar-logo {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  z-index: 10; /* Keeps logo above the menu */
+}
+
+.navbar-logo img {
+  height: 80px;
+  width: auto;
+  max-width: 120px;
+  object-fit: contain;
+  transition: transform 0.3s ease;
+}
+
+.navbar-logo:hover img {
+  transform: scale(1.05);
+}
+
+/* Toggler Styling */
+.navbar-toggler {
+  border-color: #ffffff !important;
+}
+
+.navbar-toggler-icon {
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='%23f5f5f5' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e") !important;
+}
+
+/* Mobile (Max Width 991px)*/
+@media (max-width: 991px) {
+  .navbar-collapse {
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+  }
+  
+  .navbar-nav-left,
+  .navbar-nav-right {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    align-items: center; /* Centers links in the mobile dropdown */
+  }
+
+  .navbar-nav-right {
+    margin-top: 1rem; /* Space between left and right groups */
+  }
+}
+
+/* Desktop (Min Width 992px)    */
+@media (min-width: 992px) {
+  .navbar {
+    position: relative; /* Anchors the absolutely positioned logo */
+  }
+
+  /* Pushes the left and right navs to opposite sides */
+  .navbar-collapse {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+  }
+
+  /* Dead-center absolute positioning for the logo */
+  .navbar-logo {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+  }
+
+  .navbar-nav-left,
+  .navbar-nav-right {
+    display: flex;
+    flex-direction: row;
+    gap: 2rem;
+    align-items: center;
+  }
+}
+
+/* Dark Mode Footer */
+footer {
+  background-color: #000000 !important;
+  border-top: 1px solid #000000 !important;
+}
+
+footer h6 {
+  color: #f5f5f5 !important;
+  font-weight: 600;
+}
+
+footer .btn-link {
+  text-decoration: none;
+}
+
+footer li a {
+  color: #6c757d !important;
+}
+
+footer li a:hover {
+  color: #f5f5f5 !important;
+  text-decoration: underline;
+}
+
+#instagram i:hover {
+  color: #c13584;
+}
+
+#facebook i:hover {
+  color: #3b5998;
+}

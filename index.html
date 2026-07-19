@@ -1,0 +1,203 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/x-icon" href="/MEDIA/logo.png" />
+
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
+      integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+      crossorigin="anonymous"
+    />
+    <script
+      src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+      integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js"
+      integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js"
+      integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+      crossorigin="anonymous"
+    ></script>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.css"
+    />
+    <script src="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.js"></script>
+    <link rel="stylesheet" href="CSS/global.css" />
+    <link rel="stylesheet" href="CSS/index.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css"
+      integrity="sha512-YWzhKL2whUzgiheMoBFwW8CKV4qpHQAEuvilg9FAn5VJUDwKZZxkJNuGM4XkWuk94WCrrwslk8yWNGmY1EduTA=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <title>Auto Shop</title>
+  </head>
+
+  <body>
+    <div class="container-fluid">
+      <!-- Navbar is injected dynamically by JS -->
+      <div id="navbar-placeholder"></div>
+
+      <!-- Hero -->
+      <!-- Hero -->
+<div class="row mx-0 text-button-container position-relative overflow-hidden">
+  
+  <!-- Added playsinline for iOS support -->
+  <video class="hero-video" autoplay muted loop playsinline>
+    <source src="MEDIA/backgroundwb.mp4" type="video/mp4" />
+    Your browser does not support the video tag.
+  </video>
+
+  <!-- Added z-1 to ensure text stays on top of the video -->
+  <div class="col-12 px-0 d-flex flex-column justify-content-center align-items-center z-1">
+    <h1 class="main-text">Find your next car</h1>
+    <div class="d-flex justify-content-center mt-5">
+      
+      <button
+        type="button"
+        class="d-flex justify-content-center align-items-center explore w-auto gap-3 px-4 py-2 rounded-pill"
+        onclick="triggerInventoryView()"
+      >
+        <span class="explore-label">View Inventory</span>
+        <svg
+          class="d-flex justify-content-center align-items-center"
+          width="24"
+          height="24"
+          viewBox="0 0 24 24"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M5 12H19M19 12L13 6M19 12L13 18"
+            stroke="white"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          />
+        </svg>
+      </button>
+
+    </div>
+  </div>
+</div>
+      <!-- Middle container: image + details -->
+      <div
+        class="row justify-content-center align-items-center mx-0"
+        id="middle-container"
+      >
+      <!-- Left Column: Car Image -->
+      <div class="col-lg-6 col-md-12 d-flex justify-content-center align-items-center vehicle-image-col">
+        
+        <button id="prevVehicleBtn" class="vehicle-arrow left" type="button" aria-label="Previous car">
+          ‹
+        </button>
+        
+        <img
+          class="img-fluid"
+          id="vehicle_image"
+          alt="vehicle"
+        />
+        
+        <button id="nextVehicleBtn" class="vehicle-arrow right" type="button" aria-label="Next car">
+          ›
+        </button>
+        
+      </div>
+
+        <!-- Right Column: Vehicle Details -->
+        <div class="col-lg-6 col-md-12 vehicle-details-col">
+          <h1 id="vehicle_make_model" class="vehicle-title"></h1>
+
+          <div class="price-section">
+            <p class="price-label">Price</p>
+            <h2 id="vehicle_price" class="vehicle-price"></h2>
+          </div>
+
+          <p id="vehicle_description" class="vehicle-description"></p>
+
+          <!-- Vehicle Stats Grid -->
+          <div class="vehicle-stats-grid">
+            <div class="stat-item">
+              <svg
+                width="48"
+                height="48"
+                viewBox="0 0 57 57"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  fill-rule="evenodd"
+                  clip-rule="evenodd"
+                  d="M19 14.25H14.25V11.875H9.5V19H47.5V11.875H42.75V14.25H38V11.875H19V14.25ZM47.5 23.75H9.5V47.5H47.5V23.75ZM38 7.125H19V4.75H14.25V7.125H9.5C6.87665 7.125 4.75 9.25165 4.75 11.875V47.5C4.75 50.1234 6.87665 52.25 9.5 52.25H47.5C50.1234 52.25 52.25 50.1234 52.25 47.5V11.875C52.25 9.25165 50.1234 7.125 47.5 7.125H42.75V4.75H38V7.125ZM16.625 33.25V28.5H21.375V33.25H16.625ZM26.125 33.25H30.875V28.5H26.125V33.25ZM40.375 33.25H35.625V28.5H40.375V33.25ZM16.625 38V42.75H21.375V38H16.625ZM30.875 42.75H26.125V38H30.875V42.75Z"
+                  fill="#FFFFFF"
+                />
+              </svg>
+              <div>
+                <p class="stat-label">Year</p>
+                <p id="vehicle_year" class="stat-value"></p>
+              </div>
+            </div>
+
+            <div class="stat-item">
+              <svg
+                width="48"
+                height="48"
+                viewBox="0 0 54 54"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  fill-rule="evenodd"
+                  clip-rule="evenodd"
+                  d="M28.4799 2.80515C40.9246 13.6716 47.25 23.1598 47.25 31.5C47.25 43.311 38.0316 51.75 27 51.75C15.9684 51.75 6.75 43.311 6.75 31.5C6.75 23.1598 13.0754 13.6716 25.5201 2.80515L27 1.51294L28.4799 2.80515ZM11.25 31.5C11.25 40.7326 18.3693 47.25 27 47.25C35.6307 47.25 42.75 40.7326 42.75 31.5C42.75 25.0892 37.5601 17.0245 27 7.50732C16.4399 17.0245 11.25 25.0892 11.25 31.5ZM27 40.5V45C34.4558 45 40.5 38.9558 40.5 31.5H36C36 36.4705 31.9706 40.5 27 40.5Z"
+                  fill="#FFFFFF"
+                />
+              </svg>
+              <div>
+                <p class="stat-label">Fuel</p>
+                <p id="vehicle_fuel" class="stat-value"></p>
+              </div>
+            </div>
+
+            <div class="stat-item">
+              <svg
+                width="48"
+                height="48"
+                viewBox="0 0 54 54"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  fill-rule="evenodd"
+                  clip-rule="evenodd"
+                  d="M12.1463 49.0489C5.96354 44.4036 2.25 37.1333 2.25 29.25C2.25 15.581 13.331 4.5 27 4.5C40.669 4.5 51.75 15.581 51.75 29.25C51.75 37.1333 48.0365 44.4036 41.8537 49.0489L41.2533 49.5H12.7468L12.1463 49.0489ZM39.7293 45C44.4443 41.1863 47.25 35.4532 47.25 29.25C47.25 18.0662 38.1838 9 27 9C15.8162 9 6.75 18.0662 6.75 29.25C6.75 35.4532 9.5557 41.1863 14.2707 45H39.7293ZM38.9683 17.0403L35.2817 14.4597L29.3574 22.9231C28.6235 22.6495 27.8292 22.5 27 22.5C23.2721 22.5 20.25 25.5221 20.25 29.25C20.25 32.9779 23.2721 36 27 36C30.7279 36 33.75 32.9779 33.75 29.25C33.75 28.0002 33.4103 26.8298 32.8183 25.8259L38.9683 17.0403ZM29.25 29.25C29.25 30.4926 28.2426 31.5 27 31.5C25.7574 31.5 24.75 30.4926 24.75 29.25C24.75 28.0074 25.7574 27 27 27C28.2426 27 29.25 28.0074 29.25 29.25Z"
+                  fill="#FFFFFF"
+                />
+              </svg>
+              <div>
+                <p class="stat-label">Mileage</p>
+                <p id="vehicle_km" class="stat-value"></p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div id="footer-placeholder"></div>
+    <script src="JS/index.js"></script>
+    <script src="JS/components.js"></script>
+  </body>
+</html>
