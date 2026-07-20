@@ -1,0 +1,21 @@
+User-agent: *
+Allow: /
+Allow: /index.html
+Allow: /about.html
+Allow: /contact.html
+Allow: /financing.html
+Allow: /privacy.html
+Allow: /terms.html
+
+Disallow: /html_components/
+Disallow: /.git/
+
+Sitemap: https://luchettiauto.com/sitemap.xml
+
+# Google-specific
+User-agent: Googlebot
+Allow: /
+
+# Bing-specific
+User-agent: Bingbot
+Allow: /

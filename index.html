@@ -1,9 +1,40 @@
 <!doctype html>
-<html lang="en">
+<html lang="it">
   <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Scopri i migliori veicoli a Luchetti Auto. Concessionaria di auto usate a Cartoceto, Pesaro. Finanziamenti disponibili e prezzi trasparenti."
+    />
+    <meta
+      name="keywords"
+      content="auto usate, concessionaria auto, veicoli usati, Cartoceto, Pesaro, finanziamento auto, vendita auto"
+    />
+    <meta name="theme-color" content="#000000" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://luchettiauto.com/" />
+    <meta
+      property="og:title"
+      content="Luchetti Auto - Concessionaria Auto Usate a Cartoceto"
+    />
+    <meta
+      property="og:description"
+      content="Scopri i migliori veicoli a Luchetti Auto. Concessionaria di auto usate a Cartoceto, Pesaro. Finanziamenti disponibili e prezzi trasparenti."
+    />
+    <meta property="og:site_name" content="Luchetti Auto" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:url" content="https://luchettiauto.com/" />
+    <meta
+      name="twitter:title"
+      content="Luchetti Auto - Concessionaria Auto Usate"
+    />
+    <meta
+      name="twitter:description"
+      content="Scopri i migliori veicoli a Luchetti Auto. Concessionaria di auto usate a Cartoceto, Pesaro."
+    />
+    <link rel="canonical" href="https://luchettiauto.com/" />
     <link rel="icon" type="image/x-icon" href="/MEDIA/logo.ico" />
 
     <link
@@ -43,7 +74,32 @@
     />
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <title>Luchetti Auto</title>
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "LocalBusiness",
+        "name": "Luchetti Auto",
+        "image": "https://luchettiauto.com/MEDIA/logo.ico",
+        "description": "Concessionaria di auto usate a Cartoceto, Pesaro. Veicoli selezionati con cura e finanziamenti disponibili.",
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "Via Fiume 14",
+          "addressLocality": "Cartoceto",
+          "addressRegion": "Pesaro e Urbino",
+          "postalCode": "61030",
+          "addressCountry": "IT"
+        },
+        "telephone": "+393314180195",
+        "email": "autoshop@pec.it",
+        "priceRange": "€€",
+        "url": "https://luchettiauto.com",
+        "areaServed": {
+          "@type": "City",
+          "name": "Cartoceto"
+        }
+      }
+    </script>
+    <title>Luchetti Auto - Concessionaria Auto Usate a Cartoceto</title>
   </head>
 
   <body>
@@ -56,20 +112,20 @@
       >
         <video class="hero-video" autoplay muted loop playsinline>
           <source src="MEDIA/backgroundwb.mp4" type="video/mp4" />
-          Your browser does not support the video tag.
+          Il tuo browser non supporta il tag video.
         </video>
 
         <div
           class="col-12 px-0 d-flex flex-column justify-content-center align-items-center z-1"
         >
-          <h1 class="main-text">Find your next car</h1>
+          <h1 class="main-text">Trova la tua prossima auto</h1>
           <div class="d-flex justify-content-center mt-5">
             <button
               type="button"
               class="d-flex justify-content-center align-items-center explore w-auto gap-3 px-4 py-2 rounded-pill"
               onclick="triggerInventoryView()"
             >
-              <span class="explore-label">View Inventory</span>
+              <span class="explore-label">Visualizza Inventario</span>
               <svg
                 class="d-flex justify-content-center align-items-center"
                 width="24"
@@ -103,18 +159,22 @@
             id="prevVehicleBtn"
             class="vehicle-arrow left"
             type="button"
-            aria-label="Previous car"
+            aria-label="Auto precedente"
           >
             ‹
           </button>
 
-          <img class="img-fluid" id="vehicle_image" alt="vehicle" />
+          <img
+            class="img-fluid"
+            id="vehicle_image"
+            alt="Immagine del veicolo disponibile a Luchetti Auto"
+          />
 
           <button
             id="nextVehicleBtn"
             class="vehicle-arrow right"
             type="button"
-            aria-label="Next car"
+            aria-label="Auto successiva"
           >
             ›
           </button>
@@ -125,7 +185,7 @@
           <h1 id="vehicle_make_model" class="vehicle-title"></h1>
 
           <div class="price-section">
-            <p class="price-label">Price</p>
+            <p class="price-label">Prezzo</p>
             <h2 id="vehicle_price" class="vehicle-price"></h2>
           </div>
 
@@ -149,7 +209,7 @@
                 />
               </svg>
               <div>
-                <p class="stat-label">Year</p>
+                <p class="stat-label">Anno</p>
                 <p id="vehicle_year" class="stat-value"></p>
               </div>
             </div>
@@ -170,7 +230,7 @@
                 />
               </svg>
               <div>
-                <p class="stat-label">Fuel</p>
+                <p class="stat-label">Carburante</p>
                 <p id="vehicle_fuel" class="stat-value"></p>
               </div>
             </div>
@@ -191,7 +251,7 @@
                 />
               </svg>
               <div>
-                <p class="stat-label">Mileage</p>
+                <p class="stat-label">Chilometri</p>
                 <p id="vehicle_km" class="stat-value"></p>
               </div>
             </div>
