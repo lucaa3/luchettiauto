@@ -47,7 +47,7 @@ function installmentCalc() {
   }
 
   if (financingCapital <= 0) {
-    resultElement.innerText = "€ 0,00"
+    resultElement.innerText = "€ 0.00"
     return
   }
 
@@ -58,7 +58,7 @@ function installmentCalc() {
     (financingCapital * monthlyRate) /
     (1 - Math.pow(1 + monthlyRate, -duration))
 
-  const formattedRata = rata.toFixed(2).replace(".", ",")
+  const formattedRata = rata.toFixed(2).replace(".", ".")
   resultElement.innerText = "€ " + formattedRata
 }
 
