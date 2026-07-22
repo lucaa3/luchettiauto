@@ -106,9 +106,22 @@ function nextVehicle() {
 
 function renderDots() {
   const dotContainer = document.getElementById("vehicleDots")
+  const prevButton = document.getElementById("prevVehicleBtn")
+  const nextButton = document.getElementById("nextVehicleBtn")
+
   if (!dotContainer) return
 
   dotContainer.innerHTML = ""
+
+  if (vehicles.length <= 1) {
+    if (prevButton) prevButton.style.display = "none"
+    if (nextButton) nextButton.style.display = "none"
+    return
+  }
+
+  if (prevButton) prevButton.style.display = ""
+  if (nextButton) nextButton.style.display = ""
+
   vehicles.forEach((_, index) => {
     const dot = document.createElement("button")
     dot.type = "button"
