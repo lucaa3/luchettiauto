@@ -201,6 +201,8 @@ document.addEventListener("DOMContentLoaded", () => {
     if (event.pointerType === "mouse") return
     if (event.type === "touchstart" && event.touches?.length !== 1) return
 
+    if (vehicles.length <= 1) return
+
     event.preventDefault()
     isDragging = true
     startX = getClientX(event)
