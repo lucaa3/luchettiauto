@@ -1,6 +1,6 @@
 # Luchetti Auto - Premium Dealership Platform
 
-[![Live Demo](https://img.shields.io/badge/Live-Demo-brightgreen.svg)](https://luchettiauto.com)
+[![Live](https://img.shields.io/badge/Live-Demo-brightgreen.svg)](https://luchettiauto.com)
 
 A fast, serverless, and GDPR-compliant digital showroom designed for car sales.
 
