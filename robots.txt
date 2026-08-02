@@ -1,6 +1,5 @@
 User-agent: *
 Allow: /
-Disallow: /html_components/
 Disallow: /.git/
 
 Sitemap: https://luchettiauto.com/sitemap.xml
