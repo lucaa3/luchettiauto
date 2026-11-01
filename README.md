@@ -2,6 +2,10 @@
 
 [![Live](https://img.shields.io/badge/Live-Demo-brightgreen.svg)](https://luchettiauto.com)
 
+<div align="center">
+  <img src="https://github.com/user-attachments/assets/974d6001-273c-4860-9602-1faa31e0ad55" alt="Luchetti Auto Landing Page" width="100%"/>
+</div>
+
 A fast, serverless, and GDPR-compliant digital showroom designed for car sales.
 
 ## Architecture Overview
@@ -23,7 +27,15 @@ Rather than relying on a large content management system, this platform features
 Built to deliver high performance and rank efficiently in local search results.
 *   **Lightning Fast:** By removing heavy JavaScript frameworks and tracking bloat, the site achieves near-instant Time to Interactive (TTI).
 *   **Extreme Media Optimization:** Features a 1080p hero background video aggressively compressed to just **~2.5 MB**, ensuring a premium visual experience without sacrificing loading speeds.
-*   **Localized SEO:** Implements strict `<html lang="it">` tagging, Open Graph meta tags, and JSON-LD schema for Local Business, explicitly mapping the physical dealership to Google Maps crawlers. 
+*   **Localized SEO:** Implements strict `<html lang="it">` tagging, Open Graph meta tags, and JSON-LD schema for Local Business, explicitly mapping the physical dealership to Google Maps crawlers.
+
+### Lighthouse Audit 
+Demonstrated technical excellence with near-perfect performance and a 100/100 score in Technical SEO across both environments.
+
+<p align="center">
+  <img src="https://github.com/user-attachments/assets/f20bfeca-ca97-4de4-83a2-9f34458cfcae" width="48%" alt="Desktop Lighthouse Score 99"/>
+  <img src="https://github.com/user-attachments/assets/8662fd8f-3467-43e5-9147-f20c5b018d88" width="48%" alt="Mobile Lighthouse Score 88"/>
+</p>
 
 ## Security First (Zero-Trust Backend)
 The backend is completely locked down against malicious actors and injection attacks.
