@@ -83,7 +83,7 @@ function renderVehicle() {
 
     if (description) {
       description.textContent =
-        "Abbiamo appena venduto le nostre ultime vetture. Stiamo preparando i nuovi arrivi. Nel frattempo, puoi contattarci se stai cercando un'auto specifica!"
+        "Abbiamo appena venduto le nostre ultime vetture. \n Nel frattempo, puoi contattarci se stai cercando un'auto specifica!"
     }
 
     renderDots()
