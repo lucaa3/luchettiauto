@@ -10,7 +10,7 @@
     />
     <meta
       name="keywords"
-      content="auto nuove, auto usate, rivenditore auto, veicoli usati, Cartoceto, Pesaro, finanziamento auto, vendita auto"
+      content="auto nuove, auto usate, rivenditore auto, veicoli usati, Cartoceto, Pesaro, vendita auto"
     />
     <meta name="theme-color" content="#000000" />
     <meta property="og:type" content="website" />
@@ -21,7 +21,7 @@
     />
     <meta
       property="og:description"
-      content="Scopri i migliori veicoli a Luchetti Auto. Rivenditore di auto nuove e usate a Cartoceto (PU). Finanziamenti disponibili e prezzi trasparenti."
+      content="Scopri i migliori veicoli a Luchetti Auto. Rivenditore di auto nuove e usate a Cartoceto (PU), con prezzi trasparenti."
     />
     <meta property="og:site_name" content="Luchetti Auto" />
     <meta property="og:locale" content="it_IT" />
@@ -85,7 +85,7 @@
         "@type": "LocalBusiness",
         "name": "Luchetti Auto",
         "image": "https://luchettiauto.com/MEDIA/logobg.jpeg",
-        "description": "Rivenditore di auto nuove e usate a Cartoceto (PU). Veicoli selezionati con cura e finanziamenti disponibili.",
+        "description": "Rivenditore di auto nuove e usate a Cartoceto (PU). Veicoli selezionati con cura.",
         "address": {
           "@type": "PostalAddress",
           "streetAddress": "Via Fiume 14",
@@ -123,7 +123,7 @@
           class="col-12 px-0 d-flex flex-column justify-content-center align-items-center z-1"
         >
           <h1 class="main-text">Trova la tua prossima auto</h1>
-          <div class="d-flex justify-content-center mt-5">
+          <div class="d-flex justify-content-center mt-5" id="viewInventory">
             <button
               type="button"
               class="d-flex justify-content-center align-items-center explore w-auto gap-3 px-4 py-2 rounded-pill"
@@ -191,6 +191,14 @@
           </div>
 
           <p id="vehicle_description" class="vehicle-description"></p>
+          <a
+            id="vehicle-contact-link"
+            class="btn btn-outline-light align-self-start mt-2"
+            href="contact"
+            hidden
+          >
+            Contattaci
+          </a>
 
           <div class="vehicle-stats-grid">
             <div class="stat-item">

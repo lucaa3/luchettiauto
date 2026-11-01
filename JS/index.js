@@ -17,29 +17,29 @@ function closeNav() {
 let vehicles = []
 let currentVehicleIndex = 0
 
-// Fetch cars from Supabase
 async function fetchVehicles() {
   try {
     const { data, error } = await db
       .from("vehicles")
       .select("*")
+      .eq("is_visible", true) // Only show visible cars on the public site
       .order("id", { ascending: false }) // Newest cars first
 
     if (error) throw error
 
-    if (data && data.length > 0) {
-      vehicles = data.map((car) => ({
-        src: car.image_url,
-        makeModel: car.make_model,
-        year: car.year,
-        fuel: car.fuel,
-        km: car.km,
-        price: car.price,
-        description: car.description,
-      }))
+    // This cleanly handles 0 cars without crashing
+    vehicles = (data || []).map((car) => ({
+      src: car.image_url,
+      makeModel: car.make_model,
+      year: car.year,
+      fuel: car.fuel,
+      km: car.km,
+      price: car.price,
+      description: car.description,
+    }))
 
-      renderVehicle()
-    }
+    // ALWAYS run render logic, even if vehicles is empty
+    renderVehicle()
   } catch (error) {
     console.error("Error loading vehicles:", error.message)
   }
@@ -47,7 +47,12 @@ async function fetchVehicles() {
 
 // --- 4. RENDER LOGIC ---
 function renderVehicle() {
-  if (vehicles.length === 0) return // Prevent errors if data is still loading
+  const middleContainer = document.getElementById("middle-container")
+  const viewInventory = document.getElementById("viewInventory")
+
+  // Make sure the containers are visible
+  if (middleContainer) middleContainer.style.removeProperty("display")
+  if (viewInventory) viewInventory.style.removeProperty("display")
 
   const img = document.getElementById("vehicle_image")
   const makeModel = document.getElementById("vehicle_make_model")
@@ -56,6 +61,41 @@ function renderVehicle() {
   const km = document.getElementById("vehicle_km")
   const price = document.getElementById("vehicle_price")
   const description = document.getElementById("vehicle_description")
+
+  if (vehicles.length === 0) {
+    if (img) {
+      img.src = "MEDIA/seisullastrada.jpg"
+      img.alt = "Nuovi modelli in arrivo"
+      img.style.cursor = "default"
+    }
+    if (makeModel)
+      makeModel.textContent = "Nuovi modelli saranno presto disponibili!"
+
+    if (price && price.parentElement) {
+      price.parentElement.style.display = "none"
+    }
+
+    const statsGrid = document.querySelector(".vehicle-stats-grid")
+    if (statsGrid) statsGrid.style.display = "none"
+
+    const contactLink = document.getElementById("vehicle-contact-link")
+    if (contactLink) contactLink.hidden = false
+
+    if (description) {
+      description.textContent =
+        "Abbiamo appena venduto le nostre ultime vetture. Stiamo preparando i nuovi arrivi. Nel frattempo, puoi contattarci se stai cercando un'auto specifica!"
+    }
+
+    renderDots()
+    return // CRITICAL: Stop here so normal car logic doesn't try to run!
+  }
+
+  if (price && price.parentElement) price.parentElement.style.display = ""
+  const statsGrid = document.querySelector(".vehicle-stats-grid")
+  if (statsGrid) statsGrid.style.display = ""
+
+  const contactLink = document.getElementById("vehicle-contact-link")
+  if (contactLink) contactLink.hidden = true
 
   const v = vehicles[currentVehicleIndex]
 
@@ -72,7 +112,6 @@ function renderVehicle() {
     if (!isNaN(rawNumber)) {
       km.textContent = rawNumber.toLocaleString("it-IT") + " km"
     } else {
-      // Fallback: If they typed something like "TBA" or "N/A", just print the raw text
       km.textContent = v.km
     }
   }
@@ -82,7 +121,6 @@ function renderVehicle() {
     if (!isNaN(rawNumber)) {
       price.textContent = "€" + rawNumber.toLocaleString("it-IT")
     } else {
-      // Fallback: If it's not a number, just print the raw text
       price.textContent = v.price
     }
   }
@@ -217,7 +255,6 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
-  // updateSwipe stays exactly the same
   function updateSwipe(event) {
     if (!isDragging) return
     currentX = getClientX(event)
@@ -260,13 +297,19 @@ document.addEventListener("DOMContentLoaded", () => {
 
 window.triggerInventoryView = () => {
   const container = document.getElementById("middle-container")
+  if (!container) return
 
+  // Always scroll down to the inventory, even if there is only 1 car
   container.scrollIntoView({ behavior: "smooth" })
 
-  if (window.matchMedia("(hover: none) and (pointer: coarse)").matches) {
+  // ONLY trigger the mobile swipe nudge if there are 2 or more cars
+  if (
+    vehicles.length > 1 &&
+    window.matchMedia("(hover: none) and (pointer: coarse)").matches
+  ) {
     setTimeout(() => {
       container.classList.remove("swipe-nudge")
-      void container.offsetWidth // This forces the browser to restart the animation
+      void container.offsetWidth // Forces the browser to restart the animation
       container.classList.add("swipe-nudge")
     }, 600)
   }

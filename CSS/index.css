@@ -48,6 +48,14 @@ body {
   z-index: 10;
 }
 
+#vehicle_description {
+  white-space: pre-line;
+  line-height: 1.75;
+  max-width: 58ch;
+  color: rgba(255, 255, 255, 0.75);
+  margin-bottom: 2rem;
+}
+
 #vehicle_image {
   width: 100%;
   aspect-ratio: 4 / 3;
@@ -404,6 +412,18 @@ body {
 
   .explore {
     padding: 0.45rem 0.9rem;
+  }
+
+  .vehicle-stats-grid {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 20px;
+  }
+
+  #vehicle_description {
+    max-height: 400px;
+    overflow-y: auto;
+    padding-right: 8px;
   }
 }
 
