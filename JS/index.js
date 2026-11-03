@@ -4,30 +4,174 @@ const supabaseUrl = "https://jgapbdkbfcdtckrnehbr.supabase.co"
 const supabaseKey = "sb_publishable_41ybzHBLDKkL22GGFigqRw_rRfpiJcA"
 const db = createClient(supabaseUrl, supabaseKey)
 
+const previewParams = new URLSearchParams(window.location.search)
+if (previewParams.has("preview")) {
+  sessionStorage.setItem("preview_token", previewParams.get("preview"))
+  window.history.replaceState({}, document.title, window.location.pathname)
+}
+
 // --- 2. DYNAMIC VEHICLE DATA ---
 let vehicles = []
 let currentVehicleIndex = 0
 
+function showPreviewBanner(activeToken) {
+  if (document.getElementById("preview-mode-banner")) return
+
+  if (!document.getElementById("preview-mode-banner-styles")) {
+    const styles = document.createElement("style")
+    styles.id = "preview-mode-banner-styles"
+    styles.textContent = `
+      #preview-mode-banner {
+        position: fixed;
+        z-index: 1050;
+        right: 24px;
+        bottom: 24px;
+        left: 24px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 12px;
+        width: fit-content;
+        max-width: calc(100% - 48px);
+        margin: 0 auto;
+        padding: 12px 16px;
+        border: 1px solid rgba(113, 255, 164, 0.35);
+        border-radius: 999px;
+        background: rgba(15, 23, 19, 0.96);
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+        color: #f5fff8;
+        font: 500 14px/1.4 system-ui, sans-serif;
+      }
+      #preview-mode-banner .preview-mode-dot {
+        width: 9px;
+        height: 9px;
+        flex: 0 0 9px;
+        border-radius: 50%;
+        background: #45e477;
+        box-shadow: 0 0 12px rgba(69, 228, 119, 0.8);
+        animation: preview-mode-blink 1.4s ease-in-out infinite;
+      }
+      #preview-mode-banner .preview-mode-exit {
+        flex: 0 0 auto;
+        padding: 7px 12px;
+        border: 1px solid rgba(255, 255, 255, 0.35);
+        border-radius: 999px;
+        background: transparent;
+        color: inherit;
+        cursor: pointer;
+        font: inherit;
+      }
+      #preview-mode-banner .preview-mode-exit:hover {
+        background: rgba(255, 255, 255, 0.12);
+      }
+      #preview-mode-banner .preview-mode-exit:disabled {
+        cursor: wait;
+        opacity: 0.65;
+      }
+      @keyframes preview-mode-blink {
+        50% { opacity: 0.35; }
+      }
+      @media (max-width: 520px) {
+        #preview-mode-banner {
+          right: 12px;
+          bottom: 12px;
+          left: 12px;
+          max-width: calc(100% - 24px);
+          gap: 8px;
+          padding: 10px 12px;
+          font-size: 12px;
+        }
+        #preview-mode-banner .preview-mode-exit {
+          padding: 6px 9px;
+        }
+      }
+    `
+    document.head.appendChild(styles)
+  }
+
+  const banner = document.createElement("div")
+  banner.id = "preview-mode-banner"
+  banner.setAttribute("role", "status")
+
+  const dot = document.createElement("span")
+  dot.className = "preview-mode-dot"
+  dot.setAttribute("aria-hidden", "true")
+  banner.appendChild(dot)
+
+  const message = document.createElement("span")
+  message.textContent = "Preview Mode Active — Viewing Test Vehicles"
+  banner.appendChild(message)
+
+  const exitButton = document.createElement("button")
+  exitButton.className = "preview-mode-exit"
+  exitButton.type = "button"
+  exitButton.textContent = "Exit Preview"
+  exitButton.addEventListener("click", async () => {
+    exitButton.disabled = true
+    try {
+      const { error } = await db.rpc("stop_preview_session", {
+        client_token: activeToken,
+      })
+      if (error) throw error
+
+      sessionStorage.removeItem("preview_token")
+      banner.remove()
+      window.location.reload()
+    } catch (error) {
+      console.error("Error stopping preview session:", error.message)
+      window.alert("Could not exit preview mode. Please try again.")
+      exitButton.disabled = false
+    }
+  })
+  banner.appendChild(exitButton)
+  document.body.appendChild(banner)
+}
+
 async function fetchVehicles() {
   try {
-    const { data, error } = await db
-      .from("vehicles")
-      .select("*")
-      .eq("is_visible", true) // Only show visible cars on the public site
-      .order("id", { ascending: false }) // Newest cars first
+    let activeToken = sessionStorage.getItem("preview_token")
+    if (activeToken) {
+      const { data: session, error: sessionError } = await db
+        .from("preview_sessions")
+        .select("is_active, token")
+        .eq("id", 1)
+        .single()
+
+      if (sessionError && sessionError.code !== "PGRST116") {
+        throw sessionError
+      }
+
+      if (
+        sessionError ||
+        session?.is_active !== true ||
+        session.token !== activeToken
+      ) {
+        sessionStorage.removeItem("preview_token")
+        activeToken = null
+      } else {
+        showPreviewBanner(activeToken)
+      }
+    }
+
+    const { data, error } = await db.rpc(
+      "get_public_vehicles",
+      activeToken ? { client_token: activeToken } : {},
+    )
 
     if (error) throw error
 
     // This cleanly handles 0 cars without crashing
-    vehicles = (data || []).map((car) => ({
-      src: car.image_url,
-      makeModel: car.make_model,
-      year: car.year,
-      fuel: car.fuel,
-      km: car.km,
-      price: car.price,
-      description: car.description,
-    }))
+    vehicles = (data || [])
+      .sort((a, b) => b.id - a.id)
+      .map((car) => ({
+        src: car.image_url,
+        makeModel: car.make_model,
+        year: car.year,
+        fuel: car.fuel,
+        km: car.km,
+        price: car.price,
+        description: car.description,
+      }))
 
     // ALWAYS run render logic, even if vehicles is empty
     renderVehicle()
