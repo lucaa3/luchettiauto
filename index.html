@@ -27,7 +27,7 @@
     <meta property="og:locale" content="it_IT" />
     <meta
       property="og:image"
-      content="https://luchettiauto.com/MEDIA/logobg.jpeg"
+      content="https://luchettiauto.com/MEDIA/logos/logobg.jpeg"
     />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:url" content="https://luchettiauto.com/" />
@@ -40,7 +40,7 @@
       content="Scopri i migliori veicoli a Luchetti Auto. Rivenditore di Auto Nuove e Usate a Cartoceto (PU)."
     />
     <link rel="canonical" href="https://luchettiauto.com/" />
-    <link rel="icon" type="image/x-icon" href="/MEDIA/logo.ico" />
+    <link rel="icon" type="image/x-icon" href="/MEDIA/logos/logo.ico" />
 
     <link
       rel="stylesheet"
@@ -63,11 +63,6 @@
       integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
       crossorigin="anonymous"
     ></script>
-    <link
-      rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.css"
-    />
-    <script src="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.js"></script>
     <link rel="stylesheet" href="CSS/global.css" />
     <link rel="stylesheet" href="CSS/index.css" />
     <link
@@ -78,13 +73,12 @@
       referrerpolicy="no-referrer"
     />
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script type="application/ld+json">
       {
         "@context": "https://schema.org",
         "@type": "LocalBusiness",
         "name": "Luchetti Auto",
-        "image": "https://luchettiauto.com/MEDIA/logobg.jpeg",
+        "image": "https://luchettiauto.com/MEDIA/logos/logobg.jpeg",
         "description": "Rivenditore di auto nuove e usate a Cartoceto (PU). Veicoli selezionati con cura.",
         "address": {
           "@type": "PostalAddress",
@@ -116,14 +110,14 @@
         class="row mx-0 text-button-container position-relative overflow-hidden"
       >
         <video class="hero-video" autoplay muted loop playsinline>
-          <source src="MEDIA/backgroundwb.mp4" type="video/mp4" />
+          <source src="MEDIA/index/backgroundwb.mp4" type="video/mp4" />
           Il tuo browser non supporta il tag video.
         </video>
         <div
           class="col-12 px-0 d-flex flex-column justify-content-center align-items-center z-1"
         >
           <h1 class="main-text">Trova la tua prossima auto</h1>
-          <div class="d-flex justify-content-center mt-5" id="viewInventory">
+          <div class="d-flex justify-content-center mt-3 mt-sm-5" id="viewInventory">
             <button
               type="button"
               class="d-flex justify-content-center align-items-center explore w-auto gap-3 px-4 py-2 rounded-pill"
@@ -183,24 +177,14 @@
         </div>
 
         <div class="col-lg-6 col-md-12 vehicle-details-col">
-          <h1 id="vehicle_make_model" class="vehicle-title"></h1>
+          <h1 id="vehicle_make_model" class="vehicle-title mb-3"></h1>
 
-          <div class="price-section">
-            <p class="price-label">Prezzo</p>
+          <div class="price-section mb-3 pb-3">
+            <p class="price-label mb-1">Prezzo</p>
             <h2 id="vehicle_price" class="vehicle-price"></h2>
           </div>
 
-          <p id="vehicle_description" class="vehicle-description"></p>
-          <a
-            id="vehicle-contact-link"
-            class="btn btn-outline-light align-self-start mt-2"
-            href="contact"
-            hidden
-          >
-            Contattaci
-          </a>
-
-          <div class="vehicle-stats-grid">
+          <div class="vehicle-stats-grid mb-3">
             <div class="stat-item">
               <svg
                 width="48"
@@ -264,6 +248,29 @@
               </div>
             </div>
           </div>
+          <p id="vehicle_description" class="vehicle-description mb-0"></p>
+          <a
+            id="vehicle-whatsapp-link"
+            class="btn whatsapp-button vehicle-whatsapp-cta mt-4"
+            href="https://wa.me/393314180195"
+            target="_blank"
+            rel="noopener noreferrer"
+            hidden
+          >
+            <i class="fab fa-whatsapp" aria-hidden="true"></i>
+            <span><strong>Interessato?</strong> Scrivici su WhatsApp</span>
+          </a>
+          <a
+            id="no-vehicles-whatsapp-link"
+            class="btn whatsapp-button vehicle-whatsapp-cta mt-4"
+            href="https://wa.me/393314180195?text=Ciao%20Luca%2C%20mi%20puoi%20far%20sapere%20per%20piacere%20quando%20avrete%20auto%20disponibili%3F%20Grazie%20mille%21"
+            target="_blank"
+            rel="noopener noreferrer"
+            hidden
+          >
+            <i class="fab fa-whatsapp" aria-hidden="true"></i>
+            <span>Chiedici un aggiornamento su WhatsApp</span>
+          </a>
         </div>
       </div>
     </div>

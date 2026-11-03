@@ -1,25 +1,8 @@
-/* IMPORTS */
-@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@300&family=Open+Sans&family=Schoolbell&display=swap");
-
 /* GENERAL STYLES */
-
-html,
-body {
-  overflow-x: hidden;
-  font-family: Montserrat;
-  background-color: #000000;
-  color: #f5f5f5;
-  scroll-behavior: smooth;
-}
-
 .no-select,
 #middle-container,
 #middle-container * {
   user-select: none !important;
-}
-
-*:focus {
-  outline: 0 !important;
 }
 
 /* Hero Section */
@@ -51,9 +34,7 @@ body {
 #vehicle_description {
   white-space: pre-line;
   line-height: 1.75;
-  max-width: 58ch;
   color: rgba(255, 255, 255, 0.75);
-  margin-bottom: 2rem;
 }
 
 #vehicle_image {
@@ -139,7 +120,6 @@ body {
   font-size: 2.5rem;
   font-weight: 700;
   color: #f5f5f5;
-  margin-bottom: 20px;
   line-height: 1.2;
 }
 
@@ -161,17 +141,16 @@ body {
 /* Car Section */
 
 .price-section {
-  margin-bottom: 30px;
-  padding-bottom: 20px;
   border-bottom: 2px solid #2a2a2a;
 }
 
-.price-label {
-  font-size: 0.9rem;
-  color: #999;
+.price-label,
+.stat-label {
+  color: #c2c2c2;
+  font-size: 0.875rem;
+  font-weight: 600;
   text-transform: uppercase;
-  letter-spacing: 0.5px;
-  margin-bottom: 8px;
+  letter-spacing: 0.04em;
 }
 
 .vehicle-price {
@@ -185,33 +164,35 @@ body {
   font-size: 1rem;
   color: #d0d0d0;
   line-height: 1.6;
-  margin-bottom: 30px;
 }
 
 .vehicle-stats-grid {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  gap: 20px;
-  margin-top: 30px;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
 }
 
 .stat-item {
   display: flex;
-  align-items: flex-start;
-  gap: 12px;
+  align-items: center;
+  gap: 8px;
+  min-width: 0;
 }
 
 .stat-item svg {
+  width: 32px;
+  height: 32px;
   flex-shrink: 0;
+  margin-right: 4px;
   color: #ffffff;
 }
 
+.stat-item > div {
+  min-width: 0;
+}
+
 .stat-label {
-  font-size: 0.8rem;
-  color: #999;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-  margin: 0 0 4px 0;
+  margin-bottom: 0;
 }
 
 .stat-value {
@@ -221,23 +202,20 @@ body {
   margin: 0;
 }
 
+.vehicle-whatsapp-cta {
+  align-self: flex-start;
+}
+
 /* Responsive Design */
 
-@media (max-width: 992px) {
-  #vehicle_image {
-    width: 100%;
-  }
-
-  .vehicle-stats-grid {
-    grid-template-columns: 1fr 1fr;
+@media (min-width: 993px) {
+  #middle-container {
+    height: auto;
+    min-height: 100vh;
   }
 }
 
 @media (max-width: 576px) {
-  #vehicle_image {
-    width: 100%;
-  }
-
   .vehicle-details-col {
     padding: 30px 20px;
   }
@@ -251,7 +229,12 @@ body {
   }
 
   .vehicle-stats-grid {
-    grid-template-columns: 1fr;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .vehicle-whatsapp-cta {
+    align-self: stretch;
+    justify-content: center;
   }
 }
 
@@ -333,8 +316,11 @@ body {
 /* Mobile-first responsive tweaks */
 @media (max-width: 992px) {
   .text-button-container {
-    height: 70vh !important;
-    padding-top: 56px;
+    height: 100vh !important;
+    height: 100dvh !important;
+    min-height: 100vh;
+    min-height: 100dvh;
+    padding-top: 68px;
   }
 
   .main-text {
@@ -371,32 +357,24 @@ body {
 
   .vehicle-stats-grid {
     grid-template-columns: 1fr 1fr;
-    gap: 14px;
-  }
-  .hero-video {
-    object-position: center center;
+    gap: 12px;
   }
 }
 
 @media (max-width: 576px) {
-  .text-button-container {
-    height: 60vh !important;
-    padding-top: 56px;
+  .main-text {
+    font-size: clamp(2rem, 8vw, 2.5rem);
+    padding: 0 0.75rem;
+    line-height: 1.05;
   }
 
-  .main-text {
-    font-size: 1.6rem;
-    padding: 0 0.75rem;
+  .explore {
+    gap: 0.5rem !important;
+    padding: 0.4rem 0.8rem;
   }
 
   .explore-label {
-    font-size: 0.95rem;
-  }
-
-  .vehicle-stats-grid {
-    display: flex;
-    justify-content: space-around;
-    grid-template-columns: 1fr;
+    font-size: 0.9rem;
   }
 
   svg {
@@ -406,18 +384,8 @@ body {
 }
 
 @media (max-width: 400px) {
-  .main-text {
-    font-size: 1.25rem;
-  }
-
-  .explore {
-    padding: 0.45rem 0.9rem;
-  }
-
   .vehicle-stats-grid {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 20px;
+    grid-template-columns: 1fr;
   }
 
   #vehicle_description {

@@ -4,16 +4,7 @@ const supabaseUrl = "https://jgapbdkbfcdtckrnehbr.supabase.co"
 const supabaseKey = "sb_publishable_41ybzHBLDKkL22GGFigqRw_rRfpiJcA"
 const db = createClient(supabaseUrl, supabaseKey)
 
-// --- 2. NAVIGATION ---
-function openNav() {
-  document.getElementById("myNav").style.width = "100%"
-}
-
-function closeNav() {
-  document.getElementById("myNav").style.width = "0%"
-}
-
-// --- 3. DYNAMIC VEHICLE DATA ---
+// --- 2. DYNAMIC VEHICLE DATA ---
 let vehicles = []
 let currentVehicleIndex = 0
 
@@ -45,7 +36,7 @@ async function fetchVehicles() {
   }
 }
 
-// --- 4. RENDER LOGIC ---
+// --- 3. RENDER LOGIC ---
 function renderVehicle() {
   const middleContainer = document.getElementById("middle-container")
   const viewInventory = document.getElementById("viewInventory")
@@ -64,7 +55,7 @@ function renderVehicle() {
 
   if (vehicles.length === 0) {
     if (img) {
-      img.src = "MEDIA/seisullastrada.jpg"
+      img.src = "MEDIA/index/empty-inventory.jpg"
       img.alt = "Nuovi modelli in arrivo"
       img.style.cursor = "default"
     }
@@ -78,8 +69,12 @@ function renderVehicle() {
     const statsGrid = document.querySelector(".vehicle-stats-grid")
     if (statsGrid) statsGrid.style.display = "none"
 
-    const contactLink = document.getElementById("vehicle-contact-link")
-    if (contactLink) contactLink.hidden = false
+    const whatsappLink = document.getElementById("vehicle-whatsapp-link")
+    if (whatsappLink) whatsappLink.hidden = true
+    const noVehiclesWhatsappLink = document.getElementById(
+      "no-vehicles-whatsapp-link",
+    )
+    if (noVehiclesWhatsappLink) noVehiclesWhatsappLink.hidden = false
 
     if (description) {
       description.textContent =
@@ -94,10 +89,18 @@ function renderVehicle() {
   const statsGrid = document.querySelector(".vehicle-stats-grid")
   if (statsGrid) statsGrid.style.display = ""
 
-  const contactLink = document.getElementById("vehicle-contact-link")
-  if (contactLink) contactLink.hidden = true
+  const noVehiclesWhatsappLink = document.getElementById(
+    "no-vehicles-whatsapp-link",
+  )
+  if (noVehiclesWhatsappLink) noVehiclesWhatsappLink.hidden = true
+  const whatsappLink = document.getElementById("vehicle-whatsapp-link")
 
   const v = vehicles[currentVehicleIndex]
+  if (whatsappLink) {
+    const message = `Ciao Luca, sono interessato all'auto "${v.makeModel}" che ho visto sul vostro sito. Potresti darmi maggiori informazioni?`
+    whatsappLink.href = `https://wa.me/393314180195?text=${encodeURIComponent(message)}`
+    whatsappLink.hidden = false
+  }
 
   if (img) {
     img.src = v.src
@@ -174,7 +177,7 @@ function renderDots() {
   })
 }
 
-// --- 5. SWIPE & UI INITIALIZATION ---
+// --- 4. SWIPE & UI INITIALIZATION ---
 document.addEventListener("DOMContentLoaded", () => {
   const middleContainer = document.getElementById("middle-container")
   const imageCol = document.querySelector(".vehicle-image-col")
